@@ -4,6 +4,7 @@ LOCALPATH=$(pwd)
 OUT=${LOCALPATH}/out
 TOOLPATH=${LOCALPATH}/rkbin/tools
 EXTLINUXPATH=${LOCALPATH}/build/extlinux
+BOOTPATH=${LOCALPATH}/build/boot
 CHIP=""
 TARGET=""
 ROOTFS_PATH=""
@@ -58,6 +59,7 @@ generate_boot_image() {
 
 	mmd -i ${BOOT} ::/extlinux
 	mcopy -i ${BOOT} -s ${EXTLINUXPATH}/${CHIP}.conf ::/extlinux/extlinux.conf
+	mcopy -i ${BOOT} -s ${BOOTPATH}/* ::
 	mcopy -i ${BOOT} -s ${OUT}/kernel/* ::
 
 	echo -e "\e[36m Generate Boot image : ${BOOT} success! \e[0m"
